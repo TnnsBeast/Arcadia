@@ -1,6 +1,8 @@
 import can
 import time
 
+
+#Added more comments to specify which messages, also added more details on the Github about the messages and converting them
 class FlexibleBatteryCan:
     def __init__(self, can_port):
         self.bus = can.interface.Bus(bustype='socketcan', channel=can_port, bitrate=250000)
@@ -130,7 +132,7 @@ class FlexibleBatteryCan:
         return bytecurrent_msg.data[5]
 
 
-
+    #checks the message "ID", which is the first value of each message
     def updateAllMessages(self):
         for i in range(self.batteryCount):
             self.allMessages[i] = ['*','*','*','*','*']
@@ -138,25 +140,31 @@ class FlexibleBatteryCan:
             msg = self.bus.recv()
             if msg.data[0] == 32:
                 batteryNumber = msg.data[3]
+                #soc_msg
                 self.allMessages[batteryNumber - 1][0] = msg
                 #print "Assigned Battery " + str(batteryNumber) + " MSG 20"
             if msg.data[0] == 48:
                 batteryNumber = msg.data[1]
+                #soh_msg
                 self.allMessages[batteryNumber - 1][1] = msg
                 #print "Assigned Battery " + str(batteryNumber) + " MSG 30"
             if msg.data[0] == 49:
                 batteryNumber = msg.data[1]
+                #cyclecount_msg
                 self.allMessages[batteryNumber - 1][2] = msg
                 #print "Assigned Battery " + str(batteryNumber) + " MSG 31"
             if msg.data[0] == 50:
                 batteryNumber = msg.data[1]
+                #temp_msg
                 self.allMessages[batteryNumber - 1][3] = msg
                 #print "Assigned Battery " + str(batteryNumber) + " MSG 32"
             if msg.data[0] == 51:
                 batteryNumber = msg.data[1]
+                #bytecurrent_msg
                 self.allMessages[batteryNumber - 1][4] = msg
                 #print "Assigned Battery " + str(batteryNumber) + " MSG 33"
 
+    #calls all the conversion methods to convert the data of each message and store it in the readable data array
     def convertMessagesToData(self):
         for batteryNumber in range(self.batteryCount):
             self.allData[batteryNumber][0] = self.allMessages[batteryNumber][0].timestamp
