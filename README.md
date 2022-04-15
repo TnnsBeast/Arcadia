@@ -14,7 +14,7 @@ sudo ip link set up can1
 
 Every 3 seconds a "heartbeat" of 5 messages is sent out by each battery. Here is an example:
 
-                 
+-------------------------------------------                 
   can0  5FF   [8]  20 81 21 01 00 00 00 38
   
   can0  5FF   [8]  30 01 38 64 DC 05 E8 03
@@ -24,7 +24,7 @@ Every 3 seconds a "heartbeat" of 5 messages is sent out by each battery. Here is
   can0  5FF   [8]  32 01 5F 0B 73 0B 72 0B
   
   can0  5FF   [8]  33 01 00 00 00 00 00 00
-  
+-------------------------------------------
   
 For each message, the first value is D0, then D1, and so on until D7. 
 
