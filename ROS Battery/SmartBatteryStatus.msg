@@ -1,0 +1,13 @@
+float32 percentage
+float32 temperature_celcius
+float32 temperature_farenheit
+float32 state_of_health
+float32 cycle_count
+float32 low_byte_current_1
+float32 low_byte_current_2
+float32 high_byte_current_1
+float32 high_byte_current_2
+
+string charging_status
+
+uint8 battery_number
